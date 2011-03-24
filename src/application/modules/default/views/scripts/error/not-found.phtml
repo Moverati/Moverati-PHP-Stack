@@ -1,0 +1,43 @@
+<?php
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+
+use Core\Engine\View,
+    Core\HalfPipe\Entity,
+    Core\HalfPipe\View\Helper\Chip;
+
+/* @var $this View */
+
+// Set page title
+$this->headTitle('Page cannot be found');
+?>
+<div>
+    <h1>Hmm, the page you're looking for can't be found</h1>
+    <p>
+        The page you were looking for was too fast for us to catch.
+    </p>
+
+    <?= $this->partial('error/_not-found.phtml', array('errorType' => $this->errorType)) ?>
+
+    <div>
+        <h2>More Information</h2>
+        <p>
+            It appears you have landed on a page that does not exist either through a link
+            from another site or through typing the wrong url into the browser address bar.
+            In geek terms, we call this an HTTP 404 error. It occurs because we do not have
+            the page you are looking for. You can try and navigate from our <a href="<?= $this->url(array(), 'default', true) ?>">home page</a> and
+            see if you can find the page you are looking for.
+        </p>
+    </div>
+
+    <?= $this->partial('error/_debug.phtml', array('error' => $this->error, 'serviceContainer' => $this->serviceContainer)) ?>
+</div>

@@ -1,0 +1,27 @@
+<?php
+/**
+ * Moverati
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Moverati, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Moverati. (http://coreaction.com/)
+ */
+
+use Core\Engine\View,
+    Core\HalfPipe\Entity,
+    Core\HalfPipe\View\Helper\Chip;
+
+/* @var $this View */
+
+// Title
+$this->headTitle('Sitemap');
+
+// Navigation
+$navigation = $this->navigation();
+$navigation->sitemap()->setRenderInvisible(true);
+?>
+<?= $navigation->sitemap() ?>

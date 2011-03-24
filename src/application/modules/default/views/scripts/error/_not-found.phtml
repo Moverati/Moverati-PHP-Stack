@@ -1,0 +1,40 @@
+<?php
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+
+use Core\HalfPipe\Service;
+
+/* @var $this View */
+
+if (! isset($this->errorType)) {
+    $this->errorType = Service\ErrorService::URL_MISTYPED_OR_OUT_OF_DATE_BOOKMARK;
+}
+
+switch ($this->errorType) {
+    case Service\ErrorService::BROKEN_LINK_ON_A_SEARCH_ENGINE:
+        echo $this->partial('error/not-found/search-engine.phtml');
+        break;
+
+    case Service\ErrorService::BROKEN_LINK_ON_OUR_PAGE:
+        echo $this->partial('error/not-found/our-page.phtml');
+        break;
+
+    case Service\ErrorService::BROKEN_LINK_ON_SOMEONE_ELSES_PAGE:
+        echo $this->partial('error/not-found/their-page.phtml');
+        break;
+
+    case Service\ErrorService::URL_MISTYPED_OR_OUT_OF_DATE_BOOKMARK:
+    default:
+        echo $this->partial('error/not-found/url-mismatch.phtml');
+        break;
+
+}

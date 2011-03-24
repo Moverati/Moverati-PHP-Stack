@@ -1,0 +1,38 @@
+<?php
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+
+use Core\Engine\View,
+    Core\HalfPipe\Entity,
+    Core\HalfPipe\View\Helper\Chip;
+
+/* @var $this View */
+
+// Set page title
+$this->headTitle('Forbidden Page');
+?>
+<div>
+    <h2>Sorry, but we just don't think you have access</h2>
+
+    <p>
+        If you think you are suppose to have access to this page,
+        please let us know so that we can fix the problem.
+    </p>
+
+    <h3>More Information</h3>
+
+    <p>
+        This error is what we refer to in geek talk as a 403 Forbidden HTTP status.
+        It indicates that the client was able to communicate with the server,
+        but the server won't let the client access what was requested.
+    </p>
+</div>

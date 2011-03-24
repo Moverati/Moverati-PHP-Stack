@@ -1,0 +1,40 @@
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+ 
+@import url("fold/mini.css");
+@import url("fold/full.css");
+
+/**
+ * Fold Base
+ */
+@media screen {    
+    #fd {
+        left: 0;
+        width: 100%;
+        position: relative;
+    }
+
+    #fd-hd,
+    #fd-bd,
+    #fd-ft {
+        width: 100%;
+        overflow: hidden;
+        position: absolute;
+        z-index: 10;
+    }
+}
+
+@media print {
+    #fd {
+        display: none;
+    }
+}

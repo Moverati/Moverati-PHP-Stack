@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="true"
+         backupStaticAttributes="true"
+         bootstrap="Bootstrap.php"
+         colors="false"
+         syntaxCheck="true">
+    <logging>
+        <log type="coverage-html" target="reports/coverage/html" charset="UTF-8"
+             yui="true" highlight="false"
+             lowUpperBound="35" highLowerBound="70"/>
+
+        <log type="coverage-xml" target="reports/coverage/coverage.xml" />
+
+        <log type="metrics-xml" target="reports/metrics.xml" />
+        <log type="plain" target="reports/log.txt" />
+
+        <log type="tap" target="reports/log.tap" />
+
+        <log type="junit" target="reports/log.xml" logIncompleteSkipped="true" />
+        <log type="testdox-html" target="reports/testdox.html"/>
+        <log type="testdox-text" target="reports/testdox.txt"/>
+
+    </logging>
+    
+    <selenium>
+        <!--
+        <browser name="Firefox"
+                 browser="*firefox"
+                 host="localhost"
+                 port="4444"
+                 timeout="30000"
+        />
+        <browser name="Chrome"
+                 browser="*chrome"
+                 host="localhost"
+                 port="4444"
+                 timeout="30000"
+        />
+        <browser name="Safari"
+                 browser="*safari"
+                 host="localhost"
+                 port="4444"
+                 timeout="30000"
+        />
+        -->
+    </selenium>
+
+    <listeners>
+        <listener class="Core\Engine\PHPUnit\Selenium\SeleniumListener">
+            <arguments>
+                <string>http://www.coreaction.dev/</string>
+            </arguments>
+        </listener>
+    </listeners>
+
+    <php>
+        <ini name="date.timezone" value="Europe/London" />
+        <ini name="memory_limit" value="256M" />
+    </php>
+</phpunit>

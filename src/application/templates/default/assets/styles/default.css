@@ -1,0 +1,377 @@
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+
+@import url("base.css");
+@import url("typography.css");
+@import url("fold.css");
+
+/**
+ * Default CSS
+ */
+@media all {
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #E5E5E5;
+    }
+
+    body {
+        background: url(../images/hd-shade.png) repeat-x scroll 0 0 transparent;
+    }
+
+    #doc {
+        /** Start: Sticky Footer Hack */
+        min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -18.846em; /* The bottom margin is the negative value of the #ft's height */
+        *margin: 0 auto -18.375em; /* The bottom margin is the negative value of the #ft's height */
+        /** End: Sticky Footer Hack */
+    }
+
+    #hd {
+        width: 100%;
+        padding: 25px 0 18px 0;
+    }
+
+    #hd-bar {
+        background: url(../images/hd-bar.png) no-repeat scroll 0 0 transparent;
+        height: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 960px;
+        padding: 3px;
+    }
+
+    #logo {
+        padding: 5px 0 0 10px;
+    }
+
+    #logo > a {
+        display: block;
+        height: 41px;
+        width: 148px;
+        text-decoration: none;
+    }
+
+    #logo img {
+        visibility: hidden;
+    }
+
+    #logo > a > span {
+        font-family: Mistral;
+        display: none;
+    }
+
+    #logo  a:hover {
+        background: url(../images/hd-bar-active.png) no-repeat scroll 0 0 transparent;
+    }
+
+    #menu {
+        float: right;
+        padding: 0 5px;
+    }
+
+    #menu ul {
+        margin: 0;
+    }
+
+    #menu ul > li, #submenu ul > li {
+        list-style: none outside none;
+        margin: 0;
+        padding: 0;
+        display: block;
+        float: left;
+    }
+
+    #menu ul li.active a {
+        color: #FFF;
+    }
+
+    #menu ul li ul {
+        display: none;
+    }
+
+    #menu a, #submenu a {
+        display: block;
+        text-decoration: none;
+        color: #BFBFBF;
+        font-size: 116%;
+        padding: 16px 16px 17px 16px;
+    }
+
+    #menu a:hover {
+        color: #FFF;
+        background: #222;
+        padding: 16px 15px 17px 15px;
+        border-right: 1px solid #4B4B4B;
+        border-left: 1px solid #4B4B4B;
+    }
+
+    #submenu {
+        float: left;
+    }
+
+    #submenu ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    #submenu li {
+        border-right: 1px solid #DDD;
+        height: 48px;
+    }
+
+    #submenu li.active, #submenu li:hover {
+        background: url(../images/bd-bd-submenu-highlight.png) repeat-x transparent;
+    }
+
+    #submenu a {
+        color: #000;
+        padding: 17px 20px 15px
+    }
+
+    #submenu a:hover {
+        text-decoration: none;
+        background: none;
+    }
+
+    #bd-hd {
+        background: url(../images/bd-hd.png) no-repeat scroll transparent;
+        width: 959px;
+        height: 48px;
+        float: left;
+        margin: 0 6px;
+        padding: 2px 3px 0 3px;
+        position: relative;
+        z-index: 25;
+    }
+
+    #bd-bd {
+        background: url(../images/bd-bd.png) repeat-y scroll transparent;
+        width: 959px;
+        float: left;
+        margin: 0 6px;
+        padding: 0 3px 15px 3px;
+    }
+
+    #bd-ft {
+        background: url(../images/bd-ft.png) no-repeat scroll transparent;
+        width: 959px;
+        height: 9px;
+        float: left;
+        margin: 0 6px;
+        padding: 0 3px;
+    }
+    #search-container {
+        background: url(../images/layout.png) no-repeat scroll -241px -71px transparent;
+        height: 27px;
+        margin: 10px;
+        padding: 1px 0;
+        width: 266px;
+        float: right;
+    }
+
+    #search-container input[name=q] {
+        margin-left: 10px;
+        width: 220px;
+        height: 27px;
+        border: none;
+        outline: none;
+        background: none;
+        *margin-top: 0.225em;
+    }
+
+    #search-button {
+        width: 13px;
+        height: 13px;
+        overflow: hidden;
+        cursor: pointer;
+        float: right;
+        margin: 7px 12px;
+    }
+
+    #search-button input {
+        margin-top: -58px; 
+        margin-left: -241px;
+    }
+
+    #bd-bd div.content {
+        padding: 10px 20px;
+    }
+
+    #bd-bd div[role=complementary] {
+        padding-bottom: 10px;
+    }
+/*
+    #ft {
+        background: url(../images/layout.png) no-repeat scroll 0 -160px transparent;
+        height: 16px;
+        margin: 18px 0 40px 4px;
+        padding: 8px 10px 5px;
+        width: 940px;
+        font-size: 13px;
+    }*/
+
+    /** Start: Sticky Footer Hack */
+    div.bd-sticky-footer-push {
+        height: 18.846em;
+        *height: 18.375em;
+    }
+    /** End: Sticky Footer Hack */
+
+    #ft {
+        margin-top: 15px;
+        left: 0;
+        background: #333;
+        width: 100%;
+    }
+
+    #ft-bar {
+        border-top: 2px solid #0E0E0E;
+        border-bottom: 1px solid #3C3C3C;
+        background: #1E1E1E;
+        height: 9px;
+        width: 100%;
+    }
+
+    #ft-wrapper {
+        margin: auto;
+        text-align: left;
+        padding: 15px 0px 0px 0px;
+    }
+
+    #ft-wrapper > div {
+        margin-left: 7px;
+        margin-right: 7px;
+    }
+
+    #ft a, 
+    #ft-sitemap,
+    #ft-ft {
+        color: #7C7C7C;
+        text-decoration: none;
+        font-size: 93%;
+        line-height: 153.9%;
+    }
+
+    #ft a {
+        white-space: nowrap;
+    }
+
+    #ft a:hover,
+    #ft-sitemap > div.yui3-u.first a:hover {
+        background: #444;
+        color: #FFF; 
+        padding: 2px 0;
+    }
+
+    #ft-sitemap {
+        padding-bottom: 25px;
+    }
+
+    #ft-sitemap > div.yui3-u.first {
+        margin-right: -2px;
+        border-right: 1px dashed;
+    }
+
+    #ft-sitemap > div.yui3-u.first p {
+        margin-right: 3.98%;
+    }
+
+    #ft-sitemap > div.yui3-u.first a {
+        color: #AAA;
+    }
+
+    #ft-sitemap ul {
+        margin: 0;
+    }
+
+    #ft-sitemap div.yui3-u > ul > li > a {
+        color: #FFF;
+    }
+
+    #ft-sitemap li {
+        list-style: none;
+    }
+
+    #ft-ft {
+        padding-top: 15px;
+        border-top: 1px dashed;
+    }
+    
+    #ft-ft-links ul {
+        float: right;
+        margin: 0;
+    }
+
+    #ft-ft-links li {
+        list-style: none;
+        float: left;
+        padding: 0 5px;
+        border-left: 1px dotted;
+    }
+
+    #ft-ft-links li:first-child {
+        border-left: none;
+    }
+
+    #ft-space-bugfix {
+        background: #333;
+        width: 100%;
+    }
+
+    #bd-bd > .yui3-b {
+        border-left: 1px solid #DDD;
+        border-bottom: 1px solid #DDD;
+        margin-left: -2px;
+        margin-bottom: -2px;
+    }
+
+    #breadcrumbs {
+        font-size: 95%;
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+
+    /**
+     * YUI Bug where math is too big for IE
+     */
+    .yui3-gb .yui3-g .yui3-u {
+        *width: 48%;
+    }
+
+    /**
+     * YUI Enforce min-width for body
+     */
+    .yui3-d3 {
+        min-width: 74.923em;
+        *min-width: 73.05em;
+    }
+    
+    input, 
+    .dijitTextBox input,
+    .dijitComboBox input,
+    .dijitSpinne {
+        font-size: 131%;
+    }
+
+    .dijitValidationIcon {
+        height: 1.23em;
+    }
+
+    form dd {
+        margin-bottom: 5px;
+    }
+}

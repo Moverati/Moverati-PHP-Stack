@@ -1,0 +1,30 @@
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+
+@import url("base.css");
+@import url("typography.css");
+@import url("fold.css");
+
+/**
+ * Default CSS
+ */
+@media all {
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #e2e2e2;
+        color: #333;
+        font-family: arial, tahoma, verdana;
+    }
+}

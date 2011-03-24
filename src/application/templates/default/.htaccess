@@ -1,0 +1,18 @@
+<IfModule mod_setenvif.c>
+    SetEnvIf Host \.dev$ APPLICATION_ENV=development
+    SetEnvIf Host \.ple$ APPLICATION_ENV=production
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    # URL Rewriting
+    RewriteEngine on
+
+    # Rewrite css/js to minified urls
+    RewriteCond %{REQUEST_FILENAME} \.min.(js|css)$
+    RewriteRule ^(.*)$ $1 [L]
+
+    RewriteCond %{ENV:APPLICATION_ENV} =production
+    RewriteCond %{REQUEST_URI} ^(.+)/(.+)\.(js|css)$
+    RewriteCond %2.min.%3 -F
+    RewriteRule ^(.*)$ %1/%2.min.%3 [L]
+</IfModule>

@@ -1,0 +1,42 @@
+<?php
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+
+use Core\Engine\View,
+    Core\HalfPipe\Entity,
+    Core\HalfPipe\View\Helper\Chip;
+
+/* @var $this View */
+
+// Set title
+$this->headTitle('Internal Application Problem');
+?>
+<div>
+    <h1>Oops, this problem's on us</h1>
+
+    <p>
+        Sorry, you haven't done anything wrong, but it seems we have 
+        problems at the moment.
+    </p>
+
+    <div>
+        <h2>What just happened?</h2>
+        <p>
+            It appears we encountered an internal server error referred in
+            geek talk as an HTTP 500 Error. It most likely occured because of
+            a bug in our code, incorrect server configuration or because we were
+            unable to serve your request at the current time.
+        </p>
+    </div>
+
+    <?= $this->partial('error/_debug.phtml', array('error' => $this->error, 'serviceContainer' => $this->serviceContainer)) ?>
+</div>

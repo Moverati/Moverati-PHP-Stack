@@ -1,0 +1,52 @@
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+ 
+@media all {
+    ul.search-type {
+
+    }
+
+    ul.search-type > li {
+        float: left;
+        list-style: none;
+        padding: 5px 10px;
+        border: 1px solid #CCC;
+        border-right: none;
+    }
+
+    ul.search-type > li.active a {
+        font-weight: bold;
+    }
+
+    ul.search-type > li:last-child {
+        border-right: 1px solid #CCC;
+    }
+
+    ul.search-type > li.search-type-all {
+        background: #EEE;
+    }
+
+    ul.search-type > li.search-type-videos,
+    div.search-type-videos {
+        background: #00EE00;
+    }
+
+    ul.search-type > li.search-type-venues,
+    div.search-type-venues {
+        background: #EEEE00;
+    }
+
+    ul.search-type > li.search-type-people,
+    div.search-type-people {
+        background: #FF9900;
+    }
+}

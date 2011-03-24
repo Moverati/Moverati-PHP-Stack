@@ -1,0 +1,18 @@
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+ 
+@import url("../../yui/cssreset/reset-min.css");
+@import url("../../yui/cssfonts/fonts-min.css");
+@import url("../../yui/cssgrids/grids-min.css");
+@import url("../../yui/cssbase/base-min.css");
+@import url("../default.css");
+@import url("../print.css");

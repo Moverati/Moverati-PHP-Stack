@@ -1,0 +1,86 @@
+<?php
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+
+use Core\Engine\View,
+    Core\HalfPipe\Entity,
+    Core\HalfPipe\View\Helper\Chip,
+    Core\Engine\Controller\Plugin\ErrorHandler;
+
+/* @var $this View */
+
+// Environment
+$environment = isset($_SERVER['APPLICATION_ENV']) ? $_SERVER['APPLICATION_ENV'] : 'production';
+
+// Require error obj and only show debug info if enabled
+if (!isset($this->error) || $environment != 'development') {
+    return;
+}
+
+// Error object
+$error  = $this->error;
+$params = Zend_Controller_Front::getInstance()->getRequest()->getParams();
+
+// Remove the error hander object
+if (isset($params['error_handler'])) {
+    unset($params['error_handler']);
+}
+
+// Database Queries
+$queries = $this->serviceContainer->direct('doctrine.orm')->getConfiguration()->getSqlLogger()->queries;
+?>
+<div class="debug">
+    <h2>Debugging Information</h2>
+
+    <? if ($error instanceof ErrorHandler\Data) : ?>
+        <? $exception = $error->getException() ?>
+
+        <h3>Exception: <?=@ get_class($exception) ?></h3>
+
+        <p>
+            Message: <b><?=@ $exception->getMessage() ?></b><br />
+            Code: <?=@ $exception->getCode(); ?><br />
+            File: <?=@ $exception->getFile(); ?><br />
+            Line: <?=@ $exception->getLine(); ?><br />
+            <a href="http://lmgtfy.com/?q=<?=@ urlencode($exception->getMessage() . ' ' . get_class($exception)) ?>">Google the problem</a>
+        </p>
+
+        <h3>Stack trace:</h3>
+
+        <div>
+            <pre><?=@ $exception->getTraceAsString() ?></pre>
+        </div>
+    <? endif; ?>
+
+    <h3>Request Parameters:</h3>
+
+    <? var_dump($params) ?>
+
+    <h3>Route</h3>
+
+    <p>
+        Matched Route: <b><?=@ Zend_Controller_Front::getInstance()->getRouter()->getCurrentRouteName() ?></b>
+    </p>
+
+    <h4>Loaded Routes</h4>
+    <?= $this->htmlList(array_keys(Zend_Controller_Front::getInstance()->getRouter()->getRoutes())) ?>
+
+    <h3>Database Queries</h3>
+    <? if (count($queries)) : ?>
+        <? foreach ($queries as $query) : ?>
+            <pre><?=@ $query['sql'] ?></pre>
+            <? var_dump($query['params']) ?>
+        <? endforeach ?>
+    <? else : ?>
+        <p>No Database Queries Executed...</p>
+    <? endif ?>
+</div>

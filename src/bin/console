@@ -1,0 +1,72 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+
+namespace Core\HalfPipe\Cli;
+
+use Core\HalfPipe\Console\Command,
+    Symfony\Components\Console;
+
+/**
+ * Project Path
+ *
+ * Path to the basedir of the project
+ */
+if (!defined('PATH_PROJECT')) {
+        define('PATH_PROJECT', dirname(dirname(__FILE__)) . '/');
+}
+
+/**
+ * Include paths
+ */
+include_once PATH_PROJECT . 'config/paths.php';
+
+/**
+ * @see Zend_Application
+ */
+require_once 'Zend/Application.php';
+
+// Environment
+$environment = isset($_SERVER['APPLICATION_ENV']) ? $_SERVER['APPLICATION_ENV'] : 'production';
+
+// Application configuration
+$applicationConfig = PATH_PROJECT . 'config/application.xml';
+
+// Initialize application
+$application = new \Zend_Application($environment, $applicationConfig);
+$application->bootstrap();
+
+/* @var $em \Doctrine\ORM\EntityManager */
+$em = $application->getBootstrap()
+                  ->getResource('di')
+                  ->getService('doctrine.orm');
+
+/* @var $emConfig \Doctrine\ORM\Configuration */
+$emConfig = $em->getConfiguration();
+$emConfig->setQueryCacheImpl(new \Doctrine\Common\Cache\ArrayCache());
+$emConfig->setMetadataCacheImpl(new \Doctrine\Common\Cache\ArrayCache());
+$emConfig->setResultCacheImpl(new \Doctrine\Common\Cache\ArrayCache());
+$em->getMetadataFactory()->setCacheDriver(new \Doctrine\Common\Cache\ArrayCache());
+
+
+$helperSet = new Console\Helper\HelperSet(array(
+    'dialog' => new Console\Helper\DialogHelper()
+));
+
+$cli = new Console\Application('HalfPipe Command Line Interface', '0.1');
+$cli->setHelperSet($helperSet);
+$cli->addCommands(array(
+    new Command\ConsoleCommand($application->getBootstrap()->getResource('di')),
+));
+
+$cli->run();

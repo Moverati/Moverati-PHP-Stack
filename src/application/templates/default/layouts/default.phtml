@@ -1,0 +1,141 @@
+<?php
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+
+\Zend_Dojo::enableView($this);
+
+// Dojo
+$this->dojo()
+     ->setDjConfig(array(
+        'parseOnLoad' => true
+     ))
+     ->enable();
+
+// Title
+$this->headTitle('Moverati')
+     ->setSeparator(' | ');
+?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=8" />
+
+      	<?= $this->headTitle() ?>
+
+        <!-- Start: Links -->
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.4.0/dijit/themes/tundra/tundra.css" />
+      	<link rel="stylesheet" type="text/css" href="<?=@ $this->assetUrl() ?>/styles/layouts/default.css" />
+
+        <?= $this->navigation()->links() ?>
+        <?= $this->headLink() ?>
+      	<!-- End: Links -->
+    	
+      	<!-- Start: Scripts -->
+      	<!--[if lt IE 9]>
+            <script type="text/javascript" src="<?=@ $this->assetUrl() ?>/scripts/ie7/IE9.js">
+                var IE7_PNG_SUFFIX="*.png";
+            </script>
+        <![endif]-->
+        
+        <?= $this->dojo() ?>
+        <!-- End: Scripts -->
+    </head>
+    
+    <body class="tundra">
+        <!-- Start: Document -->
+        <div id="doc">
+            <!-- Start: Header -->
+            <div id="hd" class="yui3-d3">
+                <div id="hd-bar" class="yui3-gf">
+                    <div id="logo" class="first">
+                        <a href="" title="CoreAction Homepage">
+                            <img src="<?=@ $this->assetUrl() ?>/images/logo.png" alt="CoreAction's Logo">
+                            <span class="cufon">CoreAction</span>
+                        </a>
+                    </div>
+
+                    <div id="menu" role="navigation">
+                        <?= $this->navigation()->menu()->renderMenu(null, array('minDepth' => 1)) ?>
+                    </div>
+                </div>
+            </div>
+            <!-- End: Header -->
+
+            <!-- Start: Fold -->
+            <div id="fd" class="yui3-d3">
+                <div id="fd-hd"></div>
+
+                <div id="fd-bd">
+                    <ol>
+                    </ol>
+                </div>
+
+                <div id="fd-ft">
+
+                    <div class="yui3-d3" style="padding: 0pt 4px; margin: auto;">
+                            <div style="background: none repeat scroll 0% 0% rgb(0, 0, 0); width: 50px; opacity: 0.75; -moz-border-radius: 4px 4px 4px 4px; padding: 3px 5px; text-align: center; float: right; position: relative; margin: 10px 25px;"><a href="#" style="color: rgb(255, 255, 255); text-decoration: none;">Login</a></div>
+                        </div>
+                </div>
+            </div>
+            <!-- End: Fold -->
+
+            <!-- Start: Body -->
+            <div id="bd" class="yui3-d3">
+                <div id="bd-hd">
+                    <div id="submenu">
+                        <ul>
+                        </ul>
+                    </div>
+
+                    <div id="search-container" class="yui3-gf" role="search">
+                        <form name="search" method="get" action="<?=@ $this->url(array('module' => 'search'), 'default', true) ?>"  onSubmit="this.submit(); return false;">
+                            <div class="first">
+                                <input type="text" name="q" title="Search" value="Search" onBlur="if (this.value == '') this.value = this.title;" onFocus="if (this.value == this.title) this.value = ''; this.select();">
+                            </div>
+
+                            <div id="search-button">
+                                <input type="image" src="<?= $this->assetUrl() ?>/images/layout.png" alt="Search Button" title="Search Site">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="bd-bd">
+                    <div id="breadcrumbs">
+                        <?= $this->navigation()->breadcrumbs()->setRenderInvisible(true) ?>
+                    </div>
+                    <?= $this->layout()->content ?>
+                </div>
+
+                <div id="bd-ft">
+                </div>
+
+            </div>
+            <!-- End: Body -->
+
+            <div class="bd-sticky-footer-push"></div>
+        </div>
+        <!-- End: Document -->
+        
+        <!-- Start: Footer -->
+        <!-- End: Footer -->
+        
+        <!-- Start: Inline Scripts -->
+        <script type="text/javascript" src="<?=@ $this->assetUrl() ?>/scripts/producer/producer.js">
+        //<![CDATA[
+            producer.init();
+        //]]>
+        </script>
+        <!-- End: Inline Scripts -->
+    </body>
+</html>

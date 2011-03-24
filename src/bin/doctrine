@@ -1,0 +1,115 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+
+namespace Core\HalfPipe\Cli;
+
+use Symfony\Components\Console,
+    Doctrine\DBAL\Tools\Console as DBALConsole,
+    Doctrine\ORM\Tools\Console as ORMConsole,
+    Doctrine\DBAL\Migrations\Tools\Console as MigrationsConsole;
+
+/**
+ * Doctrine CLI
+ *
+ * @author    Geoffrey Tran
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+
+/**
+ * Project Path
+ *
+ * Path to the basedir of the project
+ */
+if (!defined('PATH_PROJECT')) {
+    define('PATH_PROJECT', dirname(dirname(__FILE__)) . '/');
+}
+
+/**
+ * Include paths
+ */
+include_once PATH_PROJECT . 'config/paths.php';
+
+/**
+ * @see Zend_Application
+ */
+require_once 'Zend/Application.php';
+
+// Environment
+$environment = isset($_SERVER['APPLICATION_ENV']) ? $_SERVER['APPLICATION_ENV'] : 'development';
+
+// Application configuration
+$applicationConfig = PATH_PROJECT . 'config/application.xml';
+
+// Initialize application
+$application = new \Zend_Application($environment, $applicationConfig);
+$application->bootstrap();
+
+$classLoader = new \Doctrine\Common\ClassLoader('HalfPipeMigration', '../data/migrations');
+$classLoader->register();
+
+
+/* @var $em \Doctrine\ORM\EntityManager */
+$em = $application->getBootstrap()
+                  ->getResource('di')
+                  ->getService('doctrine.orm');
+
+/* @var $emConfig \Doctrine\ORM\Configuration */
+$emConfig = $em->getConfiguration();
+$emConfig->getMetadataCacheImpl()->deleteAll();
+
+$emConfig->setQueryCacheImpl(new \Doctrine\Common\Cache\ArrayCache());
+$emConfig->setMetadataCacheImpl(new \Doctrine\Common\Cache\ArrayCache());
+$emConfig->setResultCacheImpl(new \Doctrine\Common\Cache\ArrayCache());
+
+
+$helperSet = new Console\Helper\HelperSet(array(
+    'db' => new DBALConsole\Helper\ConnectionHelper($em->getConnection()),
+    'em' => new ORMConsole\Helper\EntityManagerHelper($em),
+    'dialog' => new Console\Helper\DialogHelper()
+));
+
+$cli = new Console\Application('Doctrine Command Line Interface', \Doctrine\Common\Version::VERSION);
+$cli->setCatchExceptions(true);
+$cli->setHelperSet($helperSet);
+$cli->addCommands(array(
+    // DBAL Commands
+    new DBALConsole\Command\RunSqlCommand(),
+    new DBALConsole\Command\ImportCommand(),
+
+    // ORM Commands
+    new ORMConsole\Command\ClearCache\MetadataCommand(),
+    new ORMConsole\Command\ClearCache\ResultCommand(),
+    new ORMConsole\Command\ClearCache\QueryCommand(),
+    new ORMConsole\Command\SchemaTool\CreateCommand(),
+    new ORMConsole\Command\SchemaTool\UpdateCommand(),
+    new ORMConsole\Command\SchemaTool\DropCommand(),
+    new ORMConsole\Command\EnsureProductionSettingsCommand(),
+    new ORMConsole\Command\ConvertDoctrine1SchemaCommand(),
+    new ORMConsole\Command\GenerateRepositoriesCommand(),
+    new ORMConsole\Command\GenerateEntitiesCommand(),
+    new ORMConsole\Command\GenerateProxiesCommand(),
+    new ORMConsole\Command\ConvertMappingCommand(),
+    new ORMConsole\Command\RunDqlCommand(),
+
+    // Migrations Commands
+    new MigrationsConsole\Command\DiffCommand(),
+    new MigrationsConsole\Command\ExecuteCommand(),
+    new MigrationsConsole\Command\GenerateCommand(),
+    new MigrationsConsole\Command\MigrateCommand(),
+    new MigrationsConsole\Command\StatusCommand(),
+    new MigrationsConsole\Command\VersionCommand()
+));
+
+$cli->run();

@@ -1,0 +1,45 @@
+@media all {
+    /**
+     * Clear floated elements
+     */
+    .clear-fix:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+
+    * html .clear-fix {  /* IE6 */
+        zoom: 1;
+    }
+
+    *:first-child+html .clear-fix { /* IE7 */
+        zoom: 1;
+    }
+
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+    }
+
+    /**
+     * Elements which only show for print
+     */
+    .print-only {
+        display: none;
+    }
+}
+
+@media print {
+    /**
+     * Elements which only show for print
+     */
+    .print-only {
+        display: block;
+    }
+}

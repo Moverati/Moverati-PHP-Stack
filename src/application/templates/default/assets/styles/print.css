@@ -1,0 +1,103 @@
+/**
+ * Core Action
+ *
+ * LICENSE
+ *
+ * This file is intellectual property of Core Action, LLC and may not
+ * be used without permission.
+ *
+ * @category  HalfPipe
+ * @copyright Copyright (c) 2010 Core Action. (http://coreaction.com/)
+ */
+ 
+@import url("print/typography.css");
+
+@media print {
+    html,
+    body {
+        background: none;
+        border: none;
+    }
+
+    #doc {
+        min-height: 0;
+        height: auto;
+        margin: auto;
+    }
+
+    #hd {
+        padding: 0;
+        border-bottom: 0.23em solid #000;
+        *border-bottom: 0.225em solid #000;
+    }
+
+    #hd-bar {
+        background: none;
+    }
+
+    #logo > a {
+        width: auto;
+    }
+    
+    #logo > a > img {
+        display: none;
+    }
+    
+    #logo > a > span {
+        color: #000;
+        font-family: Mistral;
+        font-size: 230%;
+        display: block;
+    }
+
+    #menu {
+        display: none;
+    }
+
+    #bd-hd,
+    #bd-ft,
+    div.bd-sticky-footer-push {
+        display: none;
+        background: none;
+    }
+
+    #bd-bd {
+        background: none;
+    }
+
+    #bd-bd > div.yui-b {
+        display: none;
+    }
+
+    #bd-bd div.yui-main div.yui3-b {
+        display: inherit;
+        margin-right: auto;
+    }
+
+    #ft {
+        background: none;
+        border: none;
+        position: absolute;
+    }
+
+    #ft-wrapper {
+        border-top: 0.23em solid #000;
+        *border-top: 0.225em solid #000;
+        height: auto;
+    }
+
+    #ft-bar,
+    #ft-sitemap,
+    #ft-space-bugfix,
+    #ft-ft-links {
+        display: none;
+    }
+
+    #ft-ft {
+        padding-top: 0px;
+        padding-left: 0.769em;
+        *padding-left: 0.75em;
+        color: #000;
+        border: none;
+    }
+}

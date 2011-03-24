@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<environments>    
+    <uTest name="uTest">
+        <paths>
+            <path name="app">application</path>
+        </paths>
+        <bootstrap>
+            <path>/Volumes/sites/coreapi/application/Bootstrap.php</path>
+            <class>Bootstrap</class>
+        </bootstrap>
+        <autoloaderNamespaces>
+            <namespace>Core</namespace>
+            <namespace>Doctrine</namespace>
+        </autoloaderNamespaces>
+        <resources>
+            <frontController>
+                <throwExceptions>1</throwExceptions>
+                <moduleDirectory>../application/modules</moduleDirectory>
+            </frontController>
+            <modules/>
+            <view/>
+        </resources>
+        <phpSettings>
+            <display_errors>On</display_errors>
+        </phpSettings>
+    </uTest>
+</environments>

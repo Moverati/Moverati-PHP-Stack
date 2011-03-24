@@ -1,0 +1,30 @@
+<IfModule mod_setenvif.c>
+    SetEnvIf Host \.dev$ APPLICATION_ENV=development
+    SetEnvIf Host \.ple$ APPLICATION_ENV=production
+</IfModule>
+
+DefaultType text/html
+<IfModule mod_rewrite.c>
+    # URL Rewriting
+    RewriteEngine on
+
+    # Force www
+    #RewriteCond %{HTTP_HOST} !^www.moverati.com$
+    #RewriteRule ^(.*)$ http://www.moverati.com/$1 [R=301,L]
+
+    # Rewrite css/js to minified urls
+    RewriteCond %{REQUEST_FILENAME} \.min.(js|css)$
+    RewriteRule ^(.*)$ $1 [L]
+
+    RewriteCond %{REQUEST_URI} ^(.+)/(.+)\.(js|css)$
+    RewriteCond %2.min.%3 -F
+    RewriteRule ^(.*)$ %1/%2.min.%3 [L]
+
+    # Rewrite urls to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !\.(ico)$
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+Options +FollowSymlinks
+ErrorDocument 500 error/internal
